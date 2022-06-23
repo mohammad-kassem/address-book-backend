@@ -10,9 +10,17 @@ async function addUser(body, hashPassword) {
       name,
       email,
       password: hashPassword
-});
+    });
   
     return await user.save();
-  }
+};
 
-  module.exports = addUser;
+async function getByEmail(email) {
+    return await User.findOne({
+      email
+    });
+};
+
+
+
+  module.exports = { addUser, getByEmail };
