@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema({
     min: 6,
     max: 1024,
   },
+
+  //one to many
+  contacts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Contact'
+  }],
 });
 
 module.exports = mongoose.model('User', userSchema);

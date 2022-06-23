@@ -23,5 +23,13 @@ const contactSchema = new mongoose.Schema({
   location: {
     type: [Number],
     required: true,
-  }
+  },
+
+  //many to one
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
 });
+
+module.exports = mongoose.model('Contact', contactSchema);
