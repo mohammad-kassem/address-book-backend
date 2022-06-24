@@ -47,16 +47,21 @@ async function update(req, res){
   try {
     const id = req.query.id;
     let updatedContact;
-    try {updatedContact = await updateContact(req.body, id);
-    console.log(updatedContact);}
+    try {updatedContact = await updateContact(req.body, mongoose.Types.ObjectId(id));
+    if(!Object.keys(updateContact)) return res.send("hello")}
     catch (err) {
+      console.log("hello");
+      if(Object.keys(updateContact).length == 0) return res.status(404).send({'message': 'Not found'});
       return res.status(400).send(err.code ===11000 ? 'Phone number must be unique' : Object.values(err.errors).map(val => val.message))};
 
     return res.status(200).send(updatedContact);
   }catch (err) {
+    console.log(err);
     res.status(500).send(err);
   }
 }
+
+
 
 
 module.exports = { add, get, update };
