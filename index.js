@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const authMiddleware = require('./middleware/auth');
+
 
 const userRouter = require('./src/user');
 const contactRouter = require('./src/contact');
@@ -20,6 +22,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/user', userRouter);
-app.use('/api/contacts', contactRouter);
+app.use('/api/contacts', authMiddleware(), contactRouter);
 
 app.listen(3000, () => console.log('Server running'));
