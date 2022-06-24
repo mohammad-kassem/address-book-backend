@@ -19,7 +19,14 @@ async function addContact(body, user_id) {
     return await contact.save();
 };
 
+async function getById(id) {
+  return await Contact.findById(id);
+}
+
+async function getContacts() {
+  return await Contact.find();
+}
 
 
 
-module.exports = addContact;
+module.exports = { addContact, getById, getContacts };
