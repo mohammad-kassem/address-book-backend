@@ -49,9 +49,7 @@ async function update(req, res){
     const id = req.query.id;
     let updatedContact;
     try {updatedContact = await getById(id);
-      console.log(updatedContact);
-      if (!Object.keys(updatedContact)) {console.log("hi"); return res.status(404).send({'message': 'Not found'})};
-      console.log(updatedContact);
+      if (!Object.keys(updatedContact)) {return res.status(404).send({'message': 'Not found'})};
       try {updatedContact = await updateContact(req.body, id);
       return res.status(200).send(updatedContact);}
       catch (err) {return res.status(400).send({'message': err.code ===11000 ? 'Phone must be unique' : Object.values(err.errors).map(val => val.message)})};
