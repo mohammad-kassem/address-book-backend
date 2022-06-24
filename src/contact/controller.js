@@ -1,7 +1,6 @@
 const User = require('../../model/User');
 const { addContact, getById, getContacts, updateContact, removeContact } = require('./service');
 const jwt_decode = require('jwt-decode');
-const { findById } = require('../../model/User');
 
 
 async function add(req, res) {
@@ -36,8 +35,8 @@ async function get(req, res){
       catch(err) {return res.status(404).send({'message': 'Not found'})};
       return res.status(200).send({'contact': result});
     }
-
-    const result = await getContacts();
+    const user_id = jwt_decode(req.headers['authorization'])._id;
+    const result = await getContacts(user_id);
     return res.status(200).send({'contacts': result});
     }
   catch (err) {

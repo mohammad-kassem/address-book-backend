@@ -1,4 +1,6 @@
 const Contact = require('../../model/Contact');
+const User = require('../../model/User');
+
 
 async function addContact(body, user_id) {
     const {
@@ -23,8 +25,8 @@ async function getById(id) {
   return await Contact.findById(id);
 }
 
-async function getContacts() {
-  return await Contact.find();
+async function getContacts(user_id) {
+  return await User.findById(user_id).populate('contacts');
 }
 
 async function updateContact(body, id) {
