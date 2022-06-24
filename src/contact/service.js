@@ -34,17 +34,21 @@ async function updateContact(body, id) {
     relationship,
     location
   } = body;
-
-  const contact = await Contact.findOneAndUpdate({_id:id}, {
+  const contact = await Contact.updateOne({_id: id}, {$set: {
     name,
     phone,
     relationship,
     location,
-  }, {new: true, runValidators: true});
+  }}, {new: true, runValidators: true});
 
   return contact;
 };
 
+async function removeContact(id){
+  const contact = await Contact.findByIdAndDelete({_id: id});
+  return contact;
+}
 
 
-module.exports = { addContact, getById, getContacts, updateContact };
+
+module.exports = { addContact, getById, getContacts, updateContact, removeContact };
