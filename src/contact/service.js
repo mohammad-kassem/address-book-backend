@@ -36,7 +36,7 @@ async function updateContact(body, id) {
     relationship,
     location
   } = body;
-  const contact = await Contact.updateOne({_id: id}, {$set: {
+  const contact = await Contact.findByIdAndUpdate({_id: id}, {$set: {
     name,
     phone,
     relationship,
