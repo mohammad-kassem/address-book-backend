@@ -1,5 +1,5 @@
 const User = require('../../model/User');
-const { addContact, getById, getContacts } = require('./service');
+const { addContact, getById, getContacts, updateContact } = require('./service');
 const jwt_decode = require('jwt-decode');
 
 
@@ -43,4 +43,20 @@ async function get(req, res){
   }
 }
 
-module.exports = { add, get };
+async function update(req, res){
+  try {
+    const id = req.query.id;
+    let updatedContact;
+    try {updatedContact = await updateContact(req.body, id);
+    console.log(updatedContact);}
+    catch (err) {
+      return res.status(400).send(err.code ===11000 ? 'Phone number must be unique' : Object.values(err.errors).map(val => val.message))};
+
+    return res.status(200).send(updatedContact);
+  }catch (err) {
+    res.status(500).send(err);
+  }
+}
+
+
+module.exports = { add, get, update };

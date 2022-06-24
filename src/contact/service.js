@@ -27,6 +27,24 @@ async function getContacts() {
   return await Contact.find();
 }
 
+async function updateContact(body, id) {
+  const {
+    name,
+    phone,
+    relationship,
+    location
+  } = body;
+
+  const contact = await Contact.findOneAndUpdate({_id:id}, {
+    name,
+    phone,
+    relationship,
+    location,
+  }, {new: true, runValidators: true});
+
+  return contact;
+};
 
 
-module.exports = { addContact, getById, getContacts };
+
+module.exports = { addContact, getById, getContacts, updateContact };
