@@ -7,6 +7,7 @@ async function addContact(body, user_id) {
       name,
       phone,
       relationship,
+      email,
       location
     } = body;
   
@@ -14,6 +15,7 @@ async function addContact(body, user_id) {
       name,
       phone,
       relationship,
+      email,
       location,
       user: user_id
     });
@@ -34,12 +36,14 @@ async function updateContact(body, id) {
     name,
     phone,
     relationship,
+    email,
     location
   } = body;
   const contact = await Contact.findByIdAndUpdate({_id: id}, {$set: {
     name,
     phone,
     relationship,
+    email,
     location,
   }}, {new: true, runValidators: true});
 
