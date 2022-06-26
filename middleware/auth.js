@@ -8,7 +8,7 @@ function authMiddleware() {
     try {
       jwt.verify(token, TOKEN_SECRET);
     } catch(err) {
-      return res.status(403).send('Unauthorized');
+      return res.status(403).json({message:'Unauthorized'});
     }
     // bcrypt you need to check if its valid conn
 
