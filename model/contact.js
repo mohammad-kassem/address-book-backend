@@ -7,6 +7,12 @@ const contactSchema = new mongoose.Schema({
     minLength: 6,
     maxLength: 255,
   },
+  email: {
+    type: String,
+    required: true,
+    minLength: 6,
+    maxLength: 255,
+  },
   phone: {
     type: String,
     required: true,
@@ -20,14 +26,14 @@ const contactSchema = new mongoose.Schema({
     minLength: 6,
     maxLength: 255,
   },
-  email: {
-    type: String,
-    required: true,
-    minLength: 6,
-    maxLength: 255,
-  },
+  
   location: {
     type: [Number],
+    required: true,
+  },
+
+  country: {
+    type: String,
     required: true,
   },
 

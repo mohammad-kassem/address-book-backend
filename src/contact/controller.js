@@ -6,11 +6,11 @@ const jwt_decode = require('jwt-decode');
 async function add(req, res) {
   try {
     const user_id = jwt_decode(req.headers['authorization'])._id;
+
     let newContact;
     try {newContact = await addContact(req.body, user_id)}
     catch (err) {
       return res.status(400).json({message: err.code ===11000 ? 'Phone number must be unique' : Object.values(err.errors).map(val => val.message)})};
-
     const updateUser = await User.updateOne({
         _id: newContact.user
       },{

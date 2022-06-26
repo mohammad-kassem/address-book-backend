@@ -5,18 +5,20 @@ const User = require('../../model/User');
 async function addContact(body, user_id) {
     const {
       name,
+      email,
       phone,
       relationship,
-      email,
-      location
+      location,
+      country
     } = body;
   
     const contact = new Contact({
       name,
+      email,
       phone,
       relationship,
-      email,
       location,
+      country,
       user: user_id
     });
   
@@ -34,17 +36,19 @@ async function getContacts(user_id) {
 async function updateContact(body, id) {
   const {
     name,
+    email,
     phone,
     relationship,
-    email,
-    location
+    location,
+    country
   } = body;
   const contact = await Contact.findByIdAndUpdate({_id: id}, {$set: {
     name,
+    email,
     phone,
     relationship,
-    email,
     location,
+    country
   }}, {new: true, runValidators: true});
 
   return contact;
