@@ -2,13 +2,11 @@ require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const authMiddleware = require('./middleware/auth');
+const authMiddleware = require('./middleware/authMid');
 
 
 const userRouter = require('./src/user');
 const contactRouter = require('./src/contact');
-
-
 
 
 mongoose.connect("mongodb://localhost:27017/addressbookdb")
